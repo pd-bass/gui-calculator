@@ -2,19 +2,35 @@ package de.sebastianheuckmann.controller;
 import de.sebastianheuckmann.model.CalculatorModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
+
+import java.text.DecimalFormatSymbols;
+
 public class CalculatorController {
 
-    private Operation currentOperation;
-    private Double numberA = 0.0;
     private CalculatorModel model = new CalculatorModel();
-    private boolean noValueEntered = true;
+    private Operation currentOperation = Operation.NONE;
+    private Double numberA = 0.0;
+    private Double numberB;
+
+    private static final char DECIMAL_SEPARATOR = DecimalFormatSymbols.getInstance().getDecimalSeparator();
+    private static final String ERROR_MESSAGE = "ERROR";
+    private boolean isNewInput = true;
+    private boolean calculatorFlipped = false;
     @FXML
     private TextField display;
     @FXML
     private Button btnAdd, btnSubtract, btnMultiply, btnDivide, btnPower;
+    @FXML
+    private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn0, btnDecimal;
 
+    @FXML
+    private AnchorPane rootPane;
     @FXML
     private void initialize() {
         // Assign event handlers directly to operator buttons
@@ -24,46 +40,80 @@ public class CalculatorController {
         btnMultiply.setOnAction(e -> handleOperator(Operation.MULTIPLY));
         btnDivide.setOnAction(e -> handleOperator(Operation.DIVIDE));
         btnPower.setOnAction(e -> handleOperator(Operation.POWER));
+
+        btnDecimal.setText(String.valueOf(DECIMAL_SEPARATOR)); // set Text in decimal-button according to Locale
+        rootPane.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.F) {  // Trigger the flip when 'F' key is pressed
+                flipCalculator();
+            }
+        });
     }
 
+    @FXML
+    private void handleKeyPress( KeyEvent event) {
+        switch (event.getCode()) {
+            case DIGIT0, NUMPAD0 -> handle0();
+            case DIGIT1, NUMPAD1 -> btn1.fire();
+            case DIGIT2, NUMPAD2 -> btn2.fire();
+            case DIGIT3, NUMPAD3 -> btn3.fire();
+            case DIGIT4, NUMPAD4 -> btn4.fire();
+            case DIGIT5, NUMPAD5 -> btn5.fire();
+            case DIGIT6, NUMPAD6 -> btn6.fire();
+            case DIGIT7, NUMPAD7 -> btn7.fire();
+            case DIGIT8, NUMPAD8 -> btn8.fire();
+            case DIGIT9, NUMPAD9 -> btn9.fire();
+            case ADD, PLUS -> btnAdd.fire();
+            case SUBTRACT, MINUS -> btnSubtract.fire();
+            case MULTIPLY -> btnMultiply.fire();
+            case DIVIDE, SLASH -> btnDivide.fire();
+            case ENTER, EQUALS -> handleEquals();
+            case ESCAPE -> handleAC();
+            case PERIOD, DECIMAL, COMMA -> handleDecimal();
+            case M -> handleSwap();
+            case BACK_SPACE -> handleBackspace();
+        }
+    }
+
+    @FXML
+    private void flipCalculator(){
+        calculatorFlipped = !calculatorFlipped;
+        rootPane.setRotate(calculatorFlipped ? 180 : 0);
+        //scene.setRotate(calculatorFlipped ? 180 : 0);
+    }
     @FXML
     private void handleAC(){
         display.clear();
         display.setText("0");
         numberA = 0.0;
-        noValueEntered = true;
+        isNewInput = true;
     }
     @FXML
     private void handle0(){
-        if (!display.getText().equals("0")){
+        if (!isNewInput){
             display.appendText("0");
+        }
+        else {
+            display.setText("0");
+            isNewInput = false;
         }
     }
 
-    private void updateDisplay(double result){
-        if (result % 1 == 0) {
-            display.setText(String.format("%d", (int) result));
-        }
-        else {
-            display.setText(String.valueOf(result));
-        }
-    }
     @FXML
     private void handleDigit(ActionEvent event) {
         Button clickedButton = (Button) event.getSource();
-        if (!noValueEntered){
+        if (!isNewInput ){
             display.appendText(clickedButton.getText());
         } else {
             display.clear();
             display.setText(clickedButton.getText());
-            noValueEntered = false;
+            isNewInput = false;
         }
     }
 
     @FXML
     private void handleDecimal() {
-        if (!display.getText().contains(".")) {
-            display.appendText(".");
+        if (!display.getText().contains(String.valueOf(DECIMAL_SEPARATOR))) {
+            display.appendText(String.valueOf(DECIMAL_SEPARATOR));
         }
     }
 
@@ -71,7 +121,7 @@ public class CalculatorController {
     private void handleOperator(Operation operation) {
         currentOperation = operation;
         numberA = Double.parseDouble(display.getText());
-        noValueEntered = true;
+        isNewInput = true;
     }
     @FXML
     private void handleSwap() {
@@ -80,19 +130,49 @@ public class CalculatorController {
     @FXML
     private void handleEquals() {
         if (currentOperation != null) {
-            double numberB =  Double.parseDouble(display.getText()); // store second Number
+            if (!isNewInput){
+                numberB =  Double.parseDouble(display.getText()); // store second Number (only when new Input was typed)
+            }
             double result = 0;
             switch (currentOperation) {
-                case ADD -> result = model.add(numberA, numberB);
-                case SUBTRACT -> result = model.subtract(numberA, numberB);
-                case MULTIPLY -> result = model.multiply(numberA, numberB);
-                case DIVIDE -> result = model.divide(numberA, numberB);
-                case POWER -> result = model.power(numberA, numberB);
+                    case ADD -> result = model.add(numberA, numberB);
+                    case SUBTRACT -> result = model.subtract(numberA, numberB);
+                    case MULTIPLY -> result = model.multiply(numberA, numberB);
+                    case DIVIDE -> result = model.divide(numberA, numberB);
+                    case POWER -> result = model.power(numberA, numberB);
             }
-            updateDisplay(result);
-            numberA = result;
-            noValueEntered = true;
-            currentOperation = null;
+            if (Double.isNaN(result)){
+                display.setText(ERROR_MESSAGE);
+                numberA = 0.0;
+            }
+            else {
+                updateDisplay(result);
+                numberA = result;
+            }
+            isNewInput = true;
+            // currentOperation = null;
+        }
+    }
+
+    private void handleBackspace() {
+        String text = display.getText();
+        if (text.length() > 1) {
+            display.setText(text.substring(0, text.length() - 1));
+        } else {
+            display.setText("0"); // Reset to default
+            isNewInput = true;
+        }
+    }
+
+
+    // ======  Util-Methods  ======
+
+    private void updateDisplay(double result){
+        if (result % 1 == 0) {
+            display.setText(String.format("%d", (int) result));
+        }
+        else {
+            display.setText(String.format("%.6f", result));
         }
     }
 }

@@ -1,5 +1,5 @@
 package de.sebastianheuckmann.controller;
 
 public enum Operation {
-    ADD, SUBTRACT, MULTIPLY, DIVIDE, POWER, ROOT, MODULO
+    NONE, ADD, SUBTRACT, MULTIPLY, DIVIDE, POWER, ROOT, MODULO
 }
