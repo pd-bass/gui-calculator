@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.75" prefHeight="450.0" prefWidth="278.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.sebastianheuckmann.controller.CalculatorController">
+   <children>
+      <GridPane layoutX="-1.0" layoutY="171.0" style="-fx-background-color: #dcdcdc; -fx-grid-lines-visible: true;" AnchorPane.rightAnchor="69.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="-Infinity" prefWidth="70.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="70.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="-Infinity" prefWidth="70.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="-Infinity" prefHeight="70.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="-Infinity" prefHeight="70.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="-Infinity" prefHeight="70.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="btn1" alignment="CENTER" cacheShape="false" centerShape="false" contentDisplay="TEXT_ONLY" focusTraversable="false" graphicTextGap="0.0" mnemonicParsing="false" onAction="#handleDigit" prefHeight="70.0" prefWidth="70.0" scaleShape="false" style="-fx-background-color: transparent;" text="1" textAlignment="CENTER" textOverrun="CLIP" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="34.0" />
+               </font>
+               <effect>
+                  <Lighting>
+                     <bumpInput>
+                        <Shadow />
+                     </bumpInput>
+                     <light>
+                        <Light.Distant />
+                     </light>
+                  </Lighting>
+               </effect>
+            </Button>
+            <Button fx:id="btn2" alignment="CENTER" cacheShape="false" centerShape="false" contentDisplay="TEXT_ONLY" focusTraversable="false" graphicTextGap="0.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleDigit" prefHeight="70.0" prefWidth="70.0" scaleShape="false" style="-fx-background-color: transparent;" text="2" textAlignment="CENTER" textOverrun="CLIP" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font size="34.0" />
+               </font>
+            </Button>
+            <Button fx:id="btn3" alignment="CENTER" cacheShape="false" centerShape="false" contentDisplay="TEXT_ONLY" focusTraversable="false" graphicTextGap="0.0" layoutX="80.0" layoutY="150.0" mnemonicParsing="false" onAction="#handleDigit" prefHeight="70.0" prefWidth="70.0" scaleShape="false" style="-fx-background-color: transparent;" text="3" textAlignment="CENTER" textOverrun="CLIP" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <font>
+                  <Font size="34.0" />
+               </font>
+            </Button>
+            <Button fx:id="btn4" alignment="CENTER" cacheShape="false" centerShape="false" contentDisplay="TEXT_ONLY" focusTraversable="false" graphicTextGap="0.0" layoutX="150.0" layoutY="150.0" mnemonicParsing="false" onAction="#handleDigit" prefHeight="70.0" prefWidth="70.0" scaleShape="false" style="-fx-background-color: transparent;" text="4" textAlignment="CENTER" textOverrun="CLIP" GridPane.rowIndex="1">
+               <font>
+                  <Font size="34.0" />
+               </font>
+            </Button>
+            <Button fx:id="btn5" alignment="CENTER" cacheShape="false" centerShape="false" contentDisplay="TEXT_ONLY" focusTraversable="false" graphicTextGap="0.0" layoutX="10.0" layoutY="80.0" mnemonicParsing="false" onAction="#handleDigit" prefHeight="70.0" prefWidth="70.0" scaleShape="false" style="-fx-background-color: transparent;" text="5" textAlignment="CENTER" textOverrun="CLIP" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font size="34.0" />
+               </font>
+            </Button>
+            <Button fx:id="bn6" alignment="CENTER" cacheShape="false" centerShape="false" contentDisplay="TEXT_ONLY" focusTraversable="false" graphicTextGap="0.0" layoutX="80.0" layoutY="80.0" mnemonicParsing="false" onAction="#handleDigit" prefHeight="70.0" prefWidth="70.0" scaleShape="false" style="-fx-background-color: transparent;" text="6" textAlignment="CENTER" textOverrun="CLIP" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <font>
+                  <Font size="34.0" />
+               </font>
+            </Button>
+            <Button fx:id="btn7" alignment="CENTER" cacheShape="false" centerShape="false" contentDisplay="TEXT_ONLY" focusTraversable="false" graphicTextGap="0.0" layoutX="10.0" layoutY="80.0" mnemonicParsing="false" onAction="#handleDigit" prefHeight="70.0" prefWidth="70.0" scaleShape="false" style="-fx-background-color: transparent;" text="7" textAlignment="CENTER" textOverrun="CLIP">
+               <font>
+                  <Font size="34.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Button>
+            <Button fx:id="btn8" alignment="CENTER" cacheShape="false" centerShape="false" contentDisplay="TEXT_ONLY" focusTraversable="false" graphicTextGap="0.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleDigit" prefHeight="70.0" prefWidth="70.0" scaleShape="false" style="-fx-background-color: transparent;" text="8" textAlignment="CENTER" textOverrun="CLIP" GridPane.columnIndex="1">
+               <font>
+                  <Font size="34.0" />
+               </font>
+            </Button>
+            <Button fx:id="btn9" alignment="CENTER" cacheShape="false" centerShape="false" contentDisplay="TEXT_ONLY" focusTraversable="false" graphicTextGap="0.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleDigit" prefHeight="70.0" prefWidth="70.0" scaleShape="false" style="-fx-background-color: transparent;" text="9" textAlignment="CENTER" textOverrun="CLIP" GridPane.columnIndex="2">
+               <font>
+                  <Font size="34.0" />
+               </font>
+            </Button>
+         </children>
+      </GridPane>
+      <GridPane layoutX="-1.0" layoutY="381.0" style="-fx-background-color: #dcdcdc; -fx-grid-lines-visible: true;">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="140.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="-Infinity" prefWidth="70.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="-Infinity" prefHeight="70.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="btnPoint" alignment="CENTER" cacheShape="false" centerShape="false" contentDisplay="TEXT_ONLY" focusTraversable="false" graphicTextGap="0.0" mnemonicParsing="false" onAction="#handleDecimal" prefHeight="70.0" prefWidth="70.0" scaleShape="false" style="-fx-background-color: transparent;" text="," textAlignment="CENTER" textOverrun="CLIP" GridPane.columnIndex="1">
+               <font>
+                  <Font size="34.0" />
+               </font>
+            </Button>
+            <Button fx:id="btn0" alignment="CENTER" cacheShape="false" centerShape="false" contentDisplay="TEXT_ONLY" focusTraversable="false" graphicTextGap="0.0" layoutX="150.0" layoutY="10.0" mnemonicParsing="false" onAction="#handle0" prefHeight="70.0" prefWidth="140.0" scaleShape="false" style="-fx-background-color: transparent;" text="0" textAlignment="CENTER" textOverrun="CLIP">
+               <font>
+                  <Font size="34.0" />
+               </font>
+            </Button>
+         </children>
+      </GridPane>
+      <GridPane layoutX="209.0" layoutY="101.0" style="-fx-background-color: #ffd700; -fx-grid-lines-visible: true;">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="-Infinity" prefWidth="70.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="-Infinity" prefHeight="70.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="-Infinity" prefHeight="70.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="btnMultiply" alignment="CENTER" cacheShape="false" centerShape="false" contentDisplay="TEXT_ONLY" focusTraversable="false" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="140.0" scaleShape="false" style="-fx-background-color: transparent;" text="x" textAlignment="CENTER" textOverrun="CLIP">
+               <font>
+                  <Font size="34.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnDivide" alignment="CENTER" cacheShape="false" centerShape="false" contentDisplay="TEXT_ONLY" focusTraversable="false" graphicTextGap="0.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="140.0" scaleShape="false" style="-fx-background-color: transparent;" text="/" textAlignment="CENTER" textOverrun="CLIP" GridPane.rowIndex="1">
+               <font>
+                  <Font size="34.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnAdd" alignment="CENTER" cacheShape="false" centerShape="false" contentDisplay="TEXT_ONLY" focusTraversable="false" graphicTextGap="0.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="140.0" scaleShape="false" style="-fx-background-color: transparent;" text="+" textAlignment="CENTER" textOverrun="CLIP" GridPane.rowIndex="2">
+               <font>
+                  <Font size="34.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnSubtract" alignment="CENTER" cacheShape="false" centerShape="false" contentDisplay="TEXT_ONLY" focusTraversable="false" graphicTextGap="0.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="140.0" scaleShape="false" style="-fx-background-color: transparent;" text="-" textAlignment="CENTER" textOverrun="CLIP" GridPane.rowIndex="3">
+               <font>
+                  <Font size="34.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnEquals" alignment="CENTER" cacheShape="false" centerShape="false" contentDisplay="TEXT_ONLY" focusTraversable="false" graphicTextGap="0.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleEquals" prefHeight="70.0" prefWidth="140.0" scaleShape="false" style="-fx-background-color: transparent;" text="=" textAlignment="CENTER" textOverrun="CLIP" GridPane.rowIndex="4">
+               <font>
+                  <Font size="34.0" />
+               </font>
+            </Button>
+         </children>
+      </GridPane>
+      <GridPane layoutX="-1.0" layoutY="101.0" style="-fx-background-color: #808080; -fx-grid-lines-visible: true;">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="-Infinity" prefWidth="70.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="-Infinity" prefWidth="70.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="-Infinity" prefWidth="70.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="-Infinity" prefHeight="70.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="btnAC" alignment="CENTER" cacheShape="false" centerShape="false" contentDisplay="TEXT_ONLY" focusTraversable="false" graphicTextGap="0.0" mnemonicParsing="false" onAction="#handleAC" prefHeight="70.0" prefWidth="70.0" scaleShape="false" style="-fx-background-color: transparent;" text="AC" textAlignment="CENTER" textOverrun="CLIP">
+               <font>
+                  <Font size="26.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Button>
+            <Button fx:id="btnPower" alignment="CENTER" cacheShape="false" centerShape="false" contentDisplay="TEXT_ONLY" focusTraversable="false" graphicTextGap="0.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" scaleShape="false" style="-fx-background-color: transparent;" text="x^n" textAlignment="CENTER" textOverrun="CLIP" GridPane.columnIndex="1">
+               <font>
+                  <Font size="21.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Button>
+            <Button fx:id="btnswap" alignment="CENTER" cacheShape="false" centerShape="false" contentDisplay="TEXT_ONLY" focusTraversable="false" graphicTextGap="0.0" layoutX="80.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleSwap" prefHeight="70.0" prefWidth="70.0" scaleShape="false" style="-fx-background-color: transparent;" text="+/-" textAlignment="CENTER" textOverrun="CLIP" GridPane.columnIndex="2">
+               <font>
+                  <Font size="21.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Button>
+         </children>
+      </GridPane>
+      <Pane layoutY="5.0" prefHeight="87.0" prefWidth="276.0">
+         <children>
+            <TextField fx:id="display" alignment="CENTER_RIGHT" layoutX="13.0" layoutY="5.0" prefHeight="65.0" prefWidth="250.0" style="-fx-background-color: transparent;">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <font>
+                  <Font size="41.0" />
+               </font>
+            </TextField>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

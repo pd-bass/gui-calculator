@@ -1,0 +1,108 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>de.sebastianheuckmann.calculator</groupId>
+  <artifactId>gui-calculator</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>gui-calculator</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <javaVersion>21</javaVersion>
+    <javaFXVersion>21</javaFXVersion>
+  </properties>
+
+  <dependencyManagement>
+    <!--<dependencies>
+      <dependency>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-bom</artifactId>
+        <version>19</version>
+        <scope>import</scope>
+        <type>pom</type>
+      </dependency>
+    </dependencies>-->
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>5.9.2</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>5.9.2</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-math3</artifactId>
+      <version>3.6.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jscience</groupId>
+      <artifactId>jscience</artifactId>
+      <version>4.3.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.nd4j</groupId>
+      <artifactId>nd4j-native</artifactId>
+      <version>1.0.0-beta7</version>
+    </dependency>
+
+    <!-- JavaFX Modules -->
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-controls</artifactId>
+      <version>21</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-fxml</artifactId>
+      <version>21</version>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-maven-plugin</artifactId>
+        <version>0.0.8</version>
+        <configuration>
+          <mainClass>de.sebastianheuckmann.calculator.App</mainClass>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.11.0</version>
+        <configuration>
+          <!--<source>14</source>
+          <target>14</target>-->
+          <release>21</release>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
