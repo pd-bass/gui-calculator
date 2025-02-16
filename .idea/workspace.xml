@@ -4,110 +4,70 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="79f40dbe-4397-49b6-b164-1779c90a65a9" name="Changes" comment="primitive, but working" />
+    <list default="true" id="610859a3-2350-49ba-b3d6-d85ee87d891f" name="Changes" comment="working on flipping">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/css/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fonts/digital_counter_7.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/sebastianheuckmann/calculator/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/sebastianheuckmann/calculator/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/sebastianheuckmann/controller/CalculatorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/sebastianheuckmann/controller/CalculatorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/sebastianheuckmann/controller/Operation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/sebastianheuckmann/controller/Operation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/de/sebastianheuckmann/model/CalculatorModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/de/sebastianheuckmann/model/CalculatorModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/de/sebastianheuckmann/view/calculator.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/de/sebastianheuckmann/view/calculator.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-        <option value="Enum" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
-  <component name="ProjectId" id="2sgaI6fvTezxpULojt6aCXARYva" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="2" id="Add" />
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 4
+}]]></component>
+  <component name="ProjectId" id="2srJCqzV37zQ3oRjjqGWkUU6K2r" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.19921875",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.JavaFX"
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/resources/de/sebastianheuckmann/view/" />
+      <recent name="$PROJECT_DIR$/src/main/resources/fonts" />
     </key>
-  </component>
-  <component name="RunManager">
-    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="de.sebastianheuckmann.calculator.App" />
-      <module name="gui-calculator" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="de.sebastianheuckmann.calculator.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.App" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="79f40dbe-4397-49b6-b164-1779c90a65a9" name="Changes" comment="" />
-      <created>1738879591253</created>
+      <changelist id="610859a3-2350-49ba-b3d6-d85ee87d891f" name="Changes" comment="" />
+      <created>1739207635955</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1738879591253</updated>
+      <updated>1739207635955</updated>
     </task>
-    <task id="LOCAL-00001" summary="primitive, but working">
-      <option name="closed" value="true" />
-      <created>1739197195415</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1739197195416</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
   <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="primitive, but working" />
-    <option name="LAST_COMMIT_MESSAGE" value="primitive, but working" />
-  </component>
-  <component name="XSLT-Support.FileAssociations.UIState">
-    <expand />
-    <select />
+    <MESSAGE value="working on flipping" />
+    <option name="LAST_COMMIT_MESSAGE" value="working on flipping" />
   </component>
 </project>

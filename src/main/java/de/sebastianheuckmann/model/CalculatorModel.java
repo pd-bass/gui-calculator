@@ -2,9 +2,7 @@ package de.sebastianheuckmann.model;
 
 
 public class CalculatorModel {
-
     private double result;
-
     private void setResult(double result){
         this.result = result;
     }
@@ -22,13 +20,12 @@ public class CalculatorModel {
         return getResult();
     }
 
-    public double divide(double a, double b){
+    public double divide(double a, double b) throws ArithmeticException{
         if (b != 0){
             setResult(a / b);
         }
         else {
-            System.out.println("Error! Division by Zero");
-            setResult(0); // setting result to 0 for safety
+            setResult(Double.NaN);
         }
         return getResult();
     }
@@ -45,12 +42,10 @@ public class CalculatorModel {
 
     public double nroot(double a, double b){
         if (b == 0){
-            System.out.println("Error! Root cannot be negative!");
-            setResult(0);
+            setResult(Double.NaN);
         }
         else if (a < 0 && b % 2 == 0){
-            System.out.println("Error! Even root of a negative number is not defined in real numbers!");
-            setResult(0);
+            setResult(Double.NaN);
         }
         else {
             setResult(Math.pow(a, 1.0/b));
