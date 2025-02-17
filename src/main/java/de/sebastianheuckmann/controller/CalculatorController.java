@@ -1,11 +1,10 @@
 package de.sebastianheuckmann.controller;
 import de.sebastianheuckmann.model.CalculatorModel;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
@@ -14,7 +13,7 @@ import java.text.DecimalFormatSymbols;
 public class CalculatorController {
 
     private CalculatorModel model = new CalculatorModel();
-    private Operation currentOperation = Operation.NONE;
+    private Operation currentOperation = null;
     private Double numberA = 0.0;
     private Double numberB;
 
@@ -25,7 +24,7 @@ public class CalculatorController {
     @FXML
     private TextField display;
     @FXML
-    private Button btnAdd, btnSubtract, btnMultiply, btnDivide, btnPower;
+    private Button btnAdd, btnSubtract, btnMultiply, btnDivide, btnPower, btnEquals, btnAC, btnSwap;
     @FXML
     private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn0, btnDecimal;
 
@@ -42,17 +41,17 @@ public class CalculatorController {
         btnPower.setOnAction(e -> handleOperator(Operation.POWER));
 
         btnDecimal.setText(String.valueOf(DECIMAL_SEPARATOR)); // set Text in decimal-button according to Locale
-        rootPane.setOnKeyPressed(e -> {
-            if (e.getCode() == KeyCode.F) {  // Trigger the flip when 'F' key is pressed
-                flipCalculator();
-            }
+        Platform.runLater(() -> {
+            rootPane.requestFocus();
+            rootPane.setOnKeyPressed(this :: handleKeyPress);
         });
     }
 
     @FXML
     private void handleKeyPress( KeyEvent event) {
+        System.out.println("Key pressed " + event.getCode());
         switch (event.getCode()) {
-            case DIGIT0, NUMPAD0 -> handle0();
+            case DIGIT0, NUMPAD0 -> btn0.fire();
             case DIGIT1, NUMPAD1 -> btn1.fire();
             case DIGIT2, NUMPAD2 -> btn2.fire();
             case DIGIT3, NUMPAD3 -> btn3.fire();
@@ -66,10 +65,11 @@ public class CalculatorController {
             case SUBTRACT, MINUS -> btnSubtract.fire();
             case MULTIPLY -> btnMultiply.fire();
             case DIVIDE, SLASH -> btnDivide.fire();
-            case ENTER, EQUALS -> handleEquals();
-            case ESCAPE -> handleAC();
+            case ENTER, EQUALS -> btnEquals.fire();
+            case ESCAPE -> btnAC.fire();
             case PERIOD, DECIMAL, COMMA -> handleDecimal();
-            case M -> handleSwap();
+            case M -> btnSwap.fire();
+            case F -> flipCalculator();
             case BACK_SPACE -> handleBackspace();
         }
     }
@@ -78,14 +78,15 @@ public class CalculatorController {
     private void flipCalculator(){
         calculatorFlipped = !calculatorFlipped;
         rootPane.setRotate(calculatorFlipped ? 180 : 0);
-        //scene.setRotate(calculatorFlipped ? 180 : 0);
     }
     @FXML
     private void handleAC(){
         display.clear();
         display.setText("0");
         numberA = 0.0;
+        numberB = 0.0;
         isNewInput = true;
+        currentOperation = null;
     }
     @FXML
     private void handle0(){
@@ -119,6 +120,9 @@ public class CalculatorController {
 
     @FXML
     private void handleOperator(Operation operation) {
+        if (currentOperation != null){
+            handleEquals();
+        }
         currentOperation = operation;
         numberA = Double.parseDouble(display.getText());
         isNewInput = true;

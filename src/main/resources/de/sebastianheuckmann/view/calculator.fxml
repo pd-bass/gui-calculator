@@ -117,7 +117,7 @@
                   <Insets />
                </opaqueInsets>
             </Button>
-            <Button fx:id="btnswap" alignment="CENTER" cacheShape="false" centerShape="false" contentDisplay="TEXT_ONLY" focusTraversable="false" graphicTextGap="0.0" layoutX="80.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleSwap" prefHeight="70.0" prefWidth="70.0" scaleShape="false" style="-fx-background-color: transparent;" text="+/-" textAlignment="CENTER" textOverrun="CLIP" GridPane.columnIndex="2">
+            <Button fx:id="btnSwap" alignment="CENTER" cacheShape="false" centerShape="false" contentDisplay="TEXT_ONLY" focusTraversable="false" graphicTextGap="0.0" layoutX="80.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleSwap" prefHeight="70.0" prefWidth="70.0" scaleShape="false" style="-fx-background-color: transparent;" text="+/-" textAlignment="CENTER" textOverrun="CLIP" GridPane.columnIndex="2">
                <font>
                   <Font size="21.0" />
                </font>
@@ -129,7 +129,7 @@
       </GridPane>
       <Pane layoutY="5.0" prefHeight="87.0" prefWidth="276.0">
          <children>
-            <TextField fx:id="display" alignment="CENTER_RIGHT" editable="false" layoutX="13.0" layoutY="5.0" prefHeight="65.0" prefWidth="250.0" styleClass="display">
+            <TextField fx:id="display" alignment="CENTER_RIGHT" editable="false" focusTraversable="false" layoutX="13.0" layoutY="5.0" prefHeight="65.0" prefWidth="250.0" styleClass="display">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
