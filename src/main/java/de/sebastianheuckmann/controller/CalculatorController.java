@@ -21,6 +21,7 @@ public class CalculatorController {
     private static final String ERROR_MESSAGE = "ERROR";
     private boolean isNewInput = true;
     private boolean calculatorFlipped = false;
+    private boolean equalPressed = false;
     @FXML
     private TextField display;
     @FXML
@@ -87,6 +88,7 @@ public class CalculatorController {
         numberB = 0.0;
         isNewInput = true;
         currentOperation = null;
+        btnAC.setText("AC");
     }
     @FXML
     private void handle0(){
@@ -102,6 +104,7 @@ public class CalculatorController {
     @FXML
     private void handleDigit(ActionEvent event) {
         Button clickedButton = (Button) event.getSource();
+        btnAC.setText("C");
         if (!isNewInput ){
             display.appendText(clickedButton.getText());
         } else {
@@ -120,7 +123,7 @@ public class CalculatorController {
 
     @FXML
     private void handleOperator(Operation operation) {
-        if (currentOperation != null){
+        if (currentOperation != null && !equalPressed){
             handleEquals();
         }
         currentOperation = operation;
@@ -154,7 +157,7 @@ public class CalculatorController {
                 numberA = result;
             }
             isNewInput = true;
-            // currentOperation = null;
+            equalPressed = true;
         }
     }
 
