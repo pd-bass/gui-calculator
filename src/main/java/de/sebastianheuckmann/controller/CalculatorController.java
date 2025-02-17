@@ -88,9 +88,10 @@ public class CalculatorController {
         numberB = 0.0;
         isNewInput = true;
         currentOperation = null;
+        equalPressed = false;
         btnAC.setText("AC");
     }
-    @FXML
+    /*@FXML
     private void handle0(){
         if (!isNewInput){
             display.appendText("0");
@@ -99,7 +100,7 @@ public class CalculatorController {
             display.setText("0");
             isNewInput = false;
         }
-    }
+    }*/
 
     @FXML
     private void handleDigit(ActionEvent event) {
@@ -140,14 +141,7 @@ public class CalculatorController {
             if (!isNewInput){
                 numberB =  Double.parseDouble(display.getText()); // store second Number (only when new Input was typed)
             }
-            double result = 0;
-            switch (currentOperation) {
-                    case ADD -> result = model.add(numberA, numberB);
-                    case SUBTRACT -> result = model.subtract(numberA, numberB);
-                    case MULTIPLY -> result = model.multiply(numberA, numberB);
-                    case DIVIDE -> result = model.divide(numberA, numberB);
-                    case POWER -> result = model.power(numberA, numberB);
-            }
+            double result = calculateResult();
             if (Double.isNaN(result)){
                 display.setText(ERROR_MESSAGE);
                 numberA = 0.0;
@@ -161,6 +155,18 @@ public class CalculatorController {
         }
     }
 
+    private double calculateResult(){
+        double calculatedResult;
+        switch (currentOperation) {
+            case ADD -> calculatedResult = model.add(numberA, numberB);
+            case SUBTRACT -> calculatedResult = model.subtract(numberA, numberB);
+            case MULTIPLY -> calculatedResult = model.multiply(numberA, numberB);
+            case DIVIDE -> calculatedResult = model.divide(numberA, numberB);
+            case POWER -> calculatedResult = model.power(numberA, numberB);
+            default -> throw new IllegalArgumentException("Invalid operation");
+        }
+        return calculatedResult;
+    }
     private void handleBackspace() {
         String text = display.getText();
         if (text.length() > 1) {

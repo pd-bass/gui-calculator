@@ -49,7 +49,7 @@
         </rowConstraints>
          <children>
             <Button fx:id="btnDecimal" alignment="CENTER" cacheShape="false" centerShape="false" contentDisplay="TEXT_ONLY" focusTraversable="false" graphicTextGap="0.0" mnemonicParsing="false" onAction="#handleDecimal" prefHeight="70.0" prefWidth="70.0" scaleShape="false" styleClass="number-buttons" text="," textAlignment="CENTER" textOverrun="CLIP" GridPane.columnIndex="1" />
-            <Button fx:id="btn0" alignment="CENTER" cacheShape="false" centerShape="false" contentDisplay="TEXT_ONLY" focusTraversable="false" graphicTextGap="0.0" layoutX="150.0" layoutY="10.0" mnemonicParsing="false" onAction="#handle0" prefHeight="70.0" prefWidth="140.0" scaleShape="false" styleClass="number-buttons" text="0" textAlignment="CENTER" textOverrun="CLIP" />
+            <Button fx:id="btn0" alignment="CENTER" cacheShape="false" centerShape="false" contentDisplay="TEXT_ONLY" focusTraversable="false" graphicTextGap="0.0" layoutX="150.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleDigit" prefHeight="70.0" prefWidth="140.0" scaleShape="false" styleClass="number-buttons" text="0" textAlignment="CENTER" textOverrun="CLIP" />
          </children>
       </GridPane>
       <GridPane layoutX="209.0" layoutY="101.0" style="-fx-background-color: #ffd700; -fx-grid-lines-visible: true;">
