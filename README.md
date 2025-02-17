@@ -45,11 +45,9 @@ java -cp "path/to/javafx-sdk/lib/*:bin" de.sebastianheuckmann.controller.Calcula
 
 Click buttons or use the keyboard to input numbers and operations.
 
-Press ENTER to evaluate an expression.
+Press EQUALS/ENTER to evaluate an expression.
 
-Use AC to reset calculations.
-
-Press ESC to clear the input field.
+Use ESC/AC to reset calculations.
 
 Press 'F' to toggle the UI flip effect.
 
