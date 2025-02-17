@@ -4,7 +4,7 @@
 
   <groupId>de.sebastianheuckmann.calculator</groupId>
   <artifactId>gui-calculator</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
   <packaging>jar</packaging>
 
   <name>gui-calculator</name>
@@ -15,18 +15,6 @@
     <javaVersion>21</javaVersion>
     <javaFXVersion>21</javaFXVersion>
   </properties>
-
-  <dependencyManagement>
-    <!--<dependencies>
-      <dependency>
-        <groupId>org.openjfx</groupId>
-        <artifactId>javafx-bom</artifactId>
-        <version>19</version>
-        <scope>import</scope>
-        <type>pom</type>
-      </dependency>
-    </dependencies>-->
-  </dependencyManagement>
 
   <dependencies>
     <dependency>
@@ -52,12 +40,6 @@
       <groupId>org.jscience</groupId>
       <artifactId>jscience</artifactId>
       <version>4.3.1</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.nd4j</groupId>
-      <artifactId>nd4j-native</artifactId>
-      <version>1.0.0-beta7</version>
     </dependency>
 
     <!-- JavaFX Modules -->
