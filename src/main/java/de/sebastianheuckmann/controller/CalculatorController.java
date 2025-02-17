@@ -1,4 +1,5 @@
 package de.sebastianheuckmann.controller;
+import de.sebastianheuckmann.calculator.App;
 import de.sebastianheuckmann.model.CalculatorModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -14,8 +15,10 @@ public class CalculatorController {
 
     private CalculatorModel model = new CalculatorModel();
     private Operation currentOperation = null;
+    private Operation savedOperation = null;
     private Double numberA = 0.0;
     private Double numberB;
+    private Double savedNumber;
 
     private static final char DECIMAL_SEPARATOR = DecimalFormatSymbols.getInstance().getDecimalSeparator();
     private static final String ERROR_MESSAGE = "ERROR";
@@ -25,10 +28,11 @@ public class CalculatorController {
     @FXML
     private TextField display;
     @FXML
-    private Button btnAdd, btnSubtract, btnMultiply, btnDivide, btnPower, btnEquals, btnAC, btnSwap;
+    private Button btnAdd, btnSubtract, btnMultiply, btnDivide, btnEquals, btnAC, btnSwap;
+    /*@FXML
+    private Button btnPowSq, btnPowCu, btnPowY;*/
     @FXML
     private Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn0, btnDecimal;
-
     @FXML
     private AnchorPane rootPane;
     @FXML
@@ -39,7 +43,7 @@ public class CalculatorController {
         btnSubtract.setOnAction(e -> handleOperator(Operation.SUBTRACT));
         btnMultiply.setOnAction(e -> handleOperator(Operation.MULTIPLY));
         btnDivide.setOnAction(e -> handleOperator(Operation.DIVIDE));
-        btnPower.setOnAction(e -> handleOperator(Operation.POWER));
+        // btnPowY.setOnAction(e -> handleOperator(Operation.POWER));
 
         btnDecimal.setText(String.valueOf(DECIMAL_SEPARATOR)); // set Text in decimal-button according to Locale
         Platform.runLater(() -> {
@@ -47,7 +51,9 @@ public class CalculatorController {
             rootPane.setOnKeyPressed(this :: handleKeyPress);
         });
     }
-
+    // ========================================
+    // ============ UI - METHODS ==============
+    // ========================================
     @FXML
     private void handleKeyPress( KeyEvent event) {
         System.out.println("Key pressed " + event.getCode());
@@ -72,9 +78,9 @@ public class CalculatorController {
             case M -> btnSwap.fire();
             case F -> flipCalculator();
             case BACK_SPACE -> handleBackspace();
+            case S -> switchToScientific();
         }
     }
-
     @FXML
     private void flipCalculator(){
         calculatorFlipped = !calculatorFlipped;
@@ -91,22 +97,11 @@ public class CalculatorController {
         equalPressed = false;
         btnAC.setText("AC");
     }
-    /*@FXML
-    private void handle0(){
-        if (!isNewInput){
-            display.appendText("0");
-        }
-        else {
-            display.setText("0");
-            isNewInput = false;
-        }
-    }*/
-
     @FXML
     private void handleDigit(ActionEvent event) {
         Button clickedButton = (Button) event.getSource();
         btnAC.setText("C");
-        if (!isNewInput ){
+        if (!isNewInput){
             display.appendText(clickedButton.getText());
         } else {
             display.clear();
@@ -114,32 +109,38 @@ public class CalculatorController {
             isNewInput = false;
         }
     }
-
     @FXML
     private void handleDecimal() {
         if (!display.getText().contains(String.valueOf(DECIMAL_SEPARATOR))) {
             display.appendText(String.valueOf(DECIMAL_SEPARATOR));
         }
     }
-
     @FXML
     private void handleOperator(Operation operation) {
         if (currentOperation != null && !equalPressed){
-            handleEquals();
+            if (operation.getPreference() > currentOperation.getPreference()){ // e.g. if * after +
+                savedNumber = numberA; // save the result so far
+                savedOperation = currentOperation; // save the last Operator
+
+            }
+            else {
+                handleEquals();
+            }
         }
         currentOperation = operation;
-        numberA = Double.parseDouble(display.getText());
+        numberA = Double.parseDouble(replaceDecimal(display.getText()));
         isNewInput = true;
+        equalPressed = false;
     }
     @FXML
     private void handleSwap() {
-        updateDisplay(-Double.parseDouble(display.getText()));
+        updateDisplay(-Double.parseDouble(replaceDecimal(display.getText())));
     }
     @FXML
     private void handleEquals() {
         if (currentOperation != null) {
             if (!isNewInput){
-                numberB =  Double.parseDouble(display.getText()); // store second Number (only when new Input was typed)
+                numberB =  Double.parseDouble(replaceDecimal(display.getText())); // store second Number (only when new Input was typed)
             }
             double result = calculateResult();
             if (Double.isNaN(result)){
@@ -152,6 +153,56 @@ public class CalculatorController {
             }
             isNewInput = true;
             equalPressed = true;
+        }
+    }
+    @FXML
+    private void handleBackspace() {
+        String displayContent = display.getText();
+        if (displayContent.length() > 1) {
+            display.setText(displayContent.substring(0, displayContent.length() - 1));
+        } else {
+            display.setText("0"); // Reset to default
+            isNewInput = true;
+        }
+    }
+    @FXML
+    private void inPercent() {
+        double value = Double.parseDouble(display.getText());
+        updateDisplay(value/100);
+    }
+
+    // ======= SCIENTIFIC CALCULATOR METHODS =========
+
+    /*@FXML
+    private void handlePower(ActionEvent event){
+        Button clickedButton = (Button) event.getSource();
+        switch (clickedButton.getId()) {
+            case "btnPowSq" -> updateDisplay(model.power(1,2));
+            case "btnPowCu" -> updateDisplay(model.power(1,3));
+        }
+    }*/
+
+
+    // ======  Util-Methods  ======
+
+    private String replaceDecimal(String value){
+        return value.replace(DECIMAL_SEPARATOR, '.'); //make sure that calculations always use '.' as Decimal
+    }
+    private void updateDisplay(double result){
+        if (result % 1 == 0) {
+            display.setText(String.format("%d", (int) result));
+        }
+        else {
+            String truncatedDisplay = String.format("%.6f", result);
+            while (true){
+                if (truncatedDisplay.charAt(truncatedDisplay.length()-1) == '0'){
+                    truncatedDisplay = truncatedDisplay.substring(0,truncatedDisplay.length()-1);
+                }
+                else {
+                    break;
+                }
+            }
+            display.setText(truncatedDisplay);
         }
     }
 
@@ -167,25 +218,8 @@ public class CalculatorController {
         }
         return calculatedResult;
     }
-    private void handleBackspace() {
-        String text = display.getText();
-        if (text.length() > 1) {
-            display.setText(text.substring(0, text.length() - 1));
-        } else {
-            display.setText("0"); // Reset to default
-            isNewInput = true;
-        }
-    }
 
-
-    // ======  Util-Methods  ======
-
-    private void updateDisplay(double result){
-        if (result % 1 == 0) {
-            display.setText(String.format("%d", (int) result));
-        }
-        else {
-            display.setText(String.format("%.6f", result));
-        }
+    private void switchToScientific(){
+        App.switchScene("/de/sebastianheuckmann/view/scientificCalculator.fxml");
     }
 }

@@ -6,7 +6,7 @@
 
 .display {
     -fx-font-family: 'Digital Counter 7';
-    -fx-font-size: 32px;
+    -fx-font-size: 40px;
     -fx-text-fill: white;
     -fx-background-color: transparent;
     -fx-border-color: transparent;
@@ -15,6 +15,13 @@
 .number-buttons {
     -fx-font-family: 'System';
     -fx-font-size: 34px;
+    -fx-text-fill: black;
+    -fx-background-color: transparent;
+}
+
+.scientific-operator-buttons {
+    -fx-font-family: 'System';
+    -fx-font-size: 20px;
     -fx-text-fill: black;
     -fx-background-color: transparent;
 }

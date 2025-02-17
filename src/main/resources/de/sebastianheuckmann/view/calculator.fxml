@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.75" prefHeight="450.0" prefWidth="278.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.sebastianheuckmann.controller.CalculatorController">
+<AnchorPane fx:id="rootPane" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.75" prefHeight="450.0" prefWidth="278.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.sebastianheuckmann.controller.CalculatorController">
    <children>
       <GridPane layoutX="-1.0" layoutY="171.0" style="-fx-background-color: #dcdcdc; -fx-grid-lines-visible: true;" AnchorPane.rightAnchor="69.0">
         <columnConstraints>
@@ -109,7 +109,7 @@
                   <Insets />
                </opaqueInsets>
             </Button>
-            <Button fx:id="btnPower" alignment="CENTER" cacheShape="false" centerShape="false" contentDisplay="TEXT_ONLY" focusTraversable="false" graphicTextGap="0.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" scaleShape="false" style="-fx-background-color: transparent;" text="x^n" textAlignment="CENTER" textOverrun="CLIP" GridPane.columnIndex="1">
+            <Button fx:id="btnPercent" alignment="CENTER" cacheShape="false" centerShape="false" contentDisplay="TEXT_ONLY" focusTraversable="false" graphicTextGap="0.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#inPercent" prefHeight="70.0" prefWidth="70.0" scaleShape="false" style="-fx-background-color: transparent;" text="\%" textAlignment="CENTER" textOverrun="CLIP" GridPane.columnIndex="1">
                <font>
                   <Font size="21.0" />
                </font>
@@ -129,7 +129,7 @@
       </GridPane>
       <Pane layoutY="5.0" prefHeight="87.0" prefWidth="276.0">
          <children>
-            <TextField fx:id="display" alignment="CENTER_RIGHT" editable="false" focusTraversable="false" layoutX="13.0" layoutY="5.0" prefHeight="65.0" prefWidth="250.0" styleClass="display">
+            <TextField fx:id="display" alignment="CENTER_RIGHT" editable="false" focusTraversable="false" layoutX="13.0" layoutY="14.0" prefHeight="65.0" prefWidth="250.0" styleClass="display">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
