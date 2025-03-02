@@ -7,7 +7,6 @@ A simple calculator built with JavaFX, supporting basic arithmetic operations an
 
 Basic arithmetic operations: Addition (+), Subtraction (-), Multiplication (*), and Division (/)
 
-Power operation (^)
 
 Decimal number support
 
