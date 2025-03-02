@@ -10,15 +10,20 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.text.DecimalFormatSymbols;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class CalculatorController {
 
-    private CalculatorModel model = new CalculatorModel();
-    private Operation currentOperation = null;
-    private Operation savedOperation = null;
-    private Double numberA = 0.0;
-    private Double numberB;
-    private Double savedNumber;
+    private final CalculatorModel model = new CalculatorModel();
+    private final List<Double> numbers = new ArrayList<>();
+    private final List<Operation> operations = new ArrayList<>();
+    private final List<Double> numberStorage = new ArrayList<>(); // needed for concatination of precedences
+    private final List<Operation> operationStorage = new ArrayList<>(); // needed for concatination of precedences
+
+    private Operation lastOperation;
+    private double lastNumber;
 
     private static final char DECIMAL_SEPARATOR = DecimalFormatSymbols.getInstance().getDecimalSeparator();
     private static final String ERROR_MESSAGE = "ERROR";
@@ -90,12 +95,13 @@ public class CalculatorController {
     private void handleAC(){
         display.clear();
         display.setText("0");
-        numberA = 0.0;
-        numberB = 0.0;
         isNewInput = true;
-        currentOperation = null;
         equalPressed = false;
         btnAC.setText("AC");
+        operations.clear();
+        numbers.clear();
+        operationStorage.clear();
+        numberStorage.clear();
     }
     @FXML
     private void handleDigit(ActionEvent event) {
@@ -113,48 +119,103 @@ public class CalculatorController {
     private void handleDecimal() {
         if (!display.getText().contains(String.valueOf(DECIMAL_SEPARATOR))) {
             display.appendText(String.valueOf(DECIMAL_SEPARATOR));
+            isNewInput = false;
         }
     }
+
     @FXML
     private void handleOperator(Operation operation) {
-        if (currentOperation != null && !equalPressed){
-            if (operation.getPreference() > currentOperation.getPreference()){ // e.g. if * after +
-                savedNumber = numberA; // save the result so far
-                savedOperation = currentOperation; // save the last Operator
+        double currentNumber = getDisplayAsDouble();
 
+        if (!isNewInput) {
+            numbers.add(currentNumber); // Store number before operator
+            System.out.println("Number '" + currentNumber + "' added");
+            System.out.println("Operation-list: " + operations);
+            isNewInput = true;
+        }
+        if (!operations.isEmpty()) {
+            // Handle operator precedence before adding new operation
+            if (operation.getPrecedence() <= operations.get(operations.size() - 1).getPrecedence()) {
+                System.out.println("current Precedence: " + operation.getPrecedence());
+                System.out.println("last Precedence: " + operations.get(operations.size() -1).getPrecedence());
+                if (operation.getPrecedence() < operations.get(operations.size() - 1).getPrecedence()){
+                    addStorageToLists();
+                }
+                handleEquals(); // Compute lower precedence first
             }
             else {
-                handleEquals();
+                numberStorage.add(numbers.get(0));
+                numbers.remove(0);
+                operationStorage.add(operations.get(0));
+                operations.remove(0);
             }
         }
-        currentOperation = operation;
-        numberA = Double.parseDouble(replaceDecimal(display.getText()));
-        isNewInput = true;
+        operations.add(operation);
+
         equalPressed = false;
     }
+
     @FXML
     private void handleSwap() {
-        updateDisplay(-Double.parseDouble(replaceDecimal(display.getText())));
+        updateDisplay(-getDisplayAsDouble());
+        numbers.removeLast();
+        numbers.add(getDisplayAsDouble());
     }
     @FXML
     private void handleEquals() {
-        if (currentOperation != null) {
-            if (!isNewInput){
-                numberB =  Double.parseDouble(replaceDecimal(display.getText())); // store second Number (only when new Input was typed)
+        if (numbers.isEmpty()) {
+            return;
+        }
+
+        // Store last entered number
+        if (!isNewInput) {
+            lastNumber = getDisplayAsDouble(); // if needed for a repeated calculation
+            numbers.add(lastNumber);
+            addStorageToLists();
+        }
+        if (!equalPressed){
+            // Compute in PEMDAS order
+            lastOperation = operations.getLast();
+            applyOperatorPrecedence(Operation.POWER);
+            applyOperatorPrecedence(Operation.MULTIPLY, Operation.DIVIDE);
+            applyOperatorPrecedence(Operation.ADD, Operation.SUBTRACT);
+        } else {
+            numbers.add(lastNumber);
+            operations.add(lastOperation);
+            applyOperatorPrecedence(lastOperation);
+        }
+
+        // Final result should be in numbers[0]
+        double result = numbers.get(0);
+        System.out.println("Result: " + result);
+        updateDisplay(result);
+
+        // Reset for next calculation
+        numbers.clear();
+        operations.clear();
+        numbers.add(result);
+        isNewInput = true;
+        equalPressed = true;
+    }
+    private void applyOperatorPrecedence(Operation... targetOps) {
+        int i = 0;
+        while (i < operations.size()) {
+            Operation op = operations.get(i);
+            if (Arrays.asList(targetOps).contains(op)) {
+                double a = numbers.get(i);
+                double b = numbers.get(i + 1);
+                double result = calculate(op, a, b);
+
+                // Replace `a op b` with `result`
+                numbers.set(i, result);
+                numbers.remove(i + 1);
+                operations.remove(i);
+            } else {
+                i++; // Move to next operation
             }
-            double result = calculateResult();
-            if (Double.isNaN(result)){
-                display.setText(ERROR_MESSAGE);
-                numberA = 0.0;
-            }
-            else {
-                updateDisplay(result);
-                numberA = result;
-            }
-            isNewInput = true;
-            equalPressed = true;
         }
     }
+
     @FXML
     private void handleBackspace() {
         String displayContent = display.getText();
@@ -206,17 +267,26 @@ public class CalculatorController {
         }
     }
 
-    private double calculateResult(){
-        double calculatedResult;
-        switch (currentOperation) {
-            case ADD -> calculatedResult = model.add(numberA, numberB);
-            case SUBTRACT -> calculatedResult = model.subtract(numberA, numberB);
-            case MULTIPLY -> calculatedResult = model.multiply(numberA, numberB);
-            case DIVIDE -> calculatedResult = model.divide(numberA, numberB);
-            case POWER -> calculatedResult = model.power(numberA, numberB);
+    private void addStorageToLists() {
+        numbers.addAll(0, numberStorage);
+        operations.addAll(0, operationStorage);
+        numberStorage.clear();
+        operationStorage.clear();
+    }
+
+    private Double getDisplayAsDouble() {
+        return Double.parseDouble(replaceDecimal(display.getText()));
+    }
+
+    private double calculate(Operation op, double a, double b) {
+        return switch (op) {
+            case ADD -> model.add(a, b);
+            case SUBTRACT -> model.subtract(a, b);
+            case MULTIPLY -> model.multiply(a, b);
+            case DIVIDE -> model.divide(a, b);
+            case POWER -> model.power(a, b);
             default -> throw new IllegalArgumentException("Invalid operation");
-        }
-        return calculatedResult;
+        };
     }
 
     private void switchToScientific(){
