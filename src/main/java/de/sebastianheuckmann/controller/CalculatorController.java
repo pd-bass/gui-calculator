@@ -157,9 +157,12 @@ public class CalculatorController {
 
     @FXML
     private void handleSwap() {
-        updateDisplay(-getDisplayAsDouble());
-        numbers.removeLast();
-        numbers.add(getDisplayAsDouble());
+        if (numbers.isEmpty()) {
+            return;
+        }
+        double updatedValue = -getDisplayAsDouble();
+        updateDisplay(updatedValue);
+        numbers.set(numbers.size() -1, updatedValue);
     }
     @FXML
     private void handleEquals() {
