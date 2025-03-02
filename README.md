@@ -2,6 +2,7 @@ JavaFX Calculator
 ==================
 
 A simple calculator built with JavaFX, supporting basic arithmetic operations and a clean UI.
+Also my very first project. Feel free to share your ideas and criticism.
 
 **Features**
 
