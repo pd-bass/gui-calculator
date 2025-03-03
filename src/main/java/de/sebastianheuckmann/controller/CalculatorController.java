@@ -19,8 +19,8 @@ public class CalculatorController {
     private final CalculatorModel model = new CalculatorModel();
     private final List<Double> numbers = new ArrayList<>();
     private final List<Operation> operations = new ArrayList<>();
-    private final List<Double> numberStorage = new ArrayList<>(); // needed for concatination of precedences
-    private final List<Operation> operationStorage = new ArrayList<>(); // needed for concatination of precedences
+    private final List<Double> numberStorage = new ArrayList<>(); // needed for concatenation of precedences
+    private final List<Operation> operationStorage = new ArrayList<>(); // needed for concatenation of precedences
 
     private Operation lastOperation;
     private double lastNumber;
@@ -61,7 +61,6 @@ public class CalculatorController {
     // ========================================
     @FXML
     private void handleKeyPress( KeyEvent event) {
-        System.out.println("Key pressed " + event.getCode());
         switch (event.getCode()) {
             case DIGIT0, NUMPAD0 -> btn0.fire();
             case DIGIT1, NUMPAD1 -> btn1.fire();
@@ -190,7 +189,6 @@ public class CalculatorController {
 
         // Final result should be in numbers[0]
         double result = numbers.get(0);
-        System.out.println("Result: " + result);
         updateDisplay(result);
 
         // Reset for next calculation
