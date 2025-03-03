@@ -292,7 +292,8 @@ public class CalculatorController {
         };
     }
 
-    private void switchToScientific(){
+    // later functionality
+    /*private void switchToScientific(){
         App.switchScene("/de/sebastianheuckmann/view/scientificCalculator.fxml");
-    }
+    }*/
 }

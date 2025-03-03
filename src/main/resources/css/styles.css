@@ -1,11 +1,12 @@
-@font-face {
+/* Recommendation for a good 7 segment font. To avoid legal issues on commercial use, it is not included
+/*@font-face {
     font-family: 'Digital Counter 7';
     src: url("/fonts/digital_counter_7.ttf");
-}
+}*/
 
 
 .display {
-    -fx-font-family: 'Digital Counter 7';
+    -fx-font-family: 'System';
     -fx-font-size: 40px;
     -fx-text-fill: white;
     -fx-background-color: transparent;
