@@ -4,7 +4,7 @@
 
   <groupId>de.sebastianheuckmann.calculator</groupId>
   <artifactId>gui-calculator</artifactId>
-  <version>1.1-SNAPSHOT</version>
+  <version>1.1</version>
   <packaging>jar</packaging>
 
   <name>gui-calculator</name>

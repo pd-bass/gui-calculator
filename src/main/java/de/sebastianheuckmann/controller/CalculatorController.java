@@ -83,7 +83,7 @@ public class CalculatorController {
             case M -> btnSwap.fire();
             case F -> flipCalculator();
             case BACK_SPACE -> handleBackspace();
-            case S -> switchToScientific();
+            // case S -> switchToScientific(); // for later functionality
         }
     }
     @FXML
