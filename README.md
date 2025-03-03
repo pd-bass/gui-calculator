@@ -53,7 +53,9 @@ Press 'F' to toggle the UI flip effect.
 
 **Credits**
 
-Font "Digital Counter 7" by Alexander Sizenko (www.styleseven.com)
+For the best effect of the UI-flip, a 7 segment font is recommended.
+However, because of licensing issues (no commercial use of the font), the font is not included.
+Look up styles.css for tips how to implement a good font. If you like the artist's work, consider to donate.
 
 **License**
 
