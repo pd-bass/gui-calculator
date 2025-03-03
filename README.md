@@ -17,7 +17,7 @@ Keyboard input for digits and operations
 
 Sign swap functionality (+/-)
 
-Flip UI mode for a fun interaction
+Flip UI mode for a fun interaction at all times where the answer is 5138008
 
 **Requirements**
 
