@@ -288,7 +288,7 @@ public class CalculatorController {
             case MULTIPLY -> model.multiply(a, b);
             case DIVIDE -> model.divide(a, b);
             case POWER -> model.power(a, b);
-            default -> throw new IllegalArgumentException("Invalid operation");
+            default -> throw new IllegalArgumentException(ERROR_MESSAGE);
         };
     }
 
